@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Teachers' Day | Classroom Stage Display</title>
-  
+  <title>Teachers' Day Class Backdrop</title>
+
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Canvas Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-  <!-- Google Fonts -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,600&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Kalam:wght@400;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
 
   <style>
     * {
@@ -21,124 +21,141 @@
       -webkit-user-select: none;
     }
     body {
+      overflow: hidden;
+      background-color: #030a06;
       font-family: 'Plus Jakarta Sans', sans-serif;
-      overflow: hidden; /* Smart board pe scrolling eliminate karne ke liye */
+    }
+    .font-hindi {
+      font-family: 'Kalam', cursive;
     }
     .font-chalk {
       font-family: 'Caveat', cursive;
     }
-    .font-serif-quote {
-      font-family: 'Playfair Display', serif;
+
+    /* Cinematic Blackboard Frame */
+    .smartboard-screen {
+      background: radial-gradient(circle at center, #112d20 0%, #081a12 60%, #030a06 100%);
+      box-shadow: inset 0 0 120px rgba(0, 0, 0, 0.95);
+      border: 12px solid #3c2415;
+      outline: 4px solid #1a0e08;
     }
 
-    /* Ultra-realistic Classroom Blackboard Frame */
-    .smartboard-frame {
-      background: radial-gradient(circle at 50% 40%, #153225 0%, #0c1f17 65%, #06110c 100%);
-      box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.95);
-      border: 14px solid #3d2314;
-      outline: 4px solid #1c0f08;
+    /* Blackboard subtle grid texture */
+    .board-grid {
+      background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0);
+      background-size: 28px 28px;
     }
 
-    /* Ambient Subtle Grid / Blueprint lines */
-    .board-texture {
-      background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0);
-      background-size: 32px 32px;
+    /* Shayari smooth slide/fade transition */
+    .shayari-box {
+      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     }
-
-    /* Quote transition */
-    .quote-fade {
-      transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out;
-    }
-    .quote-hidden {
+    .shayari-hidden {
       opacity: 0;
-      transform: translateY(12px) scale(0.98);
+      transform: translateY(18px) scale(0.97);
     }
-    .quote-visible {
+    .shayari-active {
       opacity: 1;
       transform: translateY(0) scale(1);
+    }
+
+    /* Floating background dialogue animation */
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(1deg); }
+    }
+    .floating-dialogue {
+      animation: floatSlow 6s ease-in-out infinite;
     }
   </style>
 </head>
 
-<body class="bg-black text-white h-screen w-screen flex flex-col p-4 sm:p-6 overflow-hidden">
+<body class="h-screen w-screen p-3 sm:p-5 flex flex-col justify-center items-center">
 
-  <!-- Smartboard Frame Container -->
-  <div class="smartboard-frame board-texture relative flex-1 rounded-3xl flex flex-col justify-between p-8 sm:p-14 overflow-hidden">
-    
-    <!-- Top Status Bar -->
+  <div class="smartboard-screen board-grid relative w-full h-full rounded-3xl flex flex-col justify-between p-6 sm:p-12 overflow-hidden shadow-2xl">
+
+    <!-- Top Header Bar -->
     <header class="flex items-center justify-between z-20">
       <div class="flex items-center gap-3">
-        <span class="px-3.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs sm:text-sm font-semibold tracking-wider uppercase flex items-center gap-2">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-          5th September • Teachers' Day
+        <span class="px-4 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs sm:text-sm font-bold tracking-wider uppercase flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse"></span>
+          🎉 Happy Teachers' Day • Backbencher To Topper Special
         </span>
       </div>
 
-      <!-- Live Digital Clock -->
-      <div class="text-right">
-        <div id="liveClock" class="text-xl sm:text-2xl font-bold tracking-wider text-emerald-200/90 font-mono">
+      <div class="text-right flex items-center gap-4">
+        <div id="liveClock" class="text-lg sm:text-2xl font-mono font-bold text-amber-200/90 drop-shadow">
           00:00:00 AM
         </div>
       </div>
     </header>
 
-    <!-- Center Stage Hero Content -->
-    <main class="my-auto text-center max-w-5xl mx-auto z-20 space-y-6 w-full">
+    <!-- Center Stage: Giant Title + Funny Shayari Carousel -->
+    <main class="my-auto text-center z-20 max-w-5xl mx-auto w-full space-y-6">
       
-      <!-- Big Blackboard Chalk Headline -->
-      <div class="space-y-2">
-        <h2 class="text-3xl sm:text-5xl font-chalk text-emerald-300/80 tracking-wide">
-          Honoring Our Mentors, Guides & Teachers
-        </h2>
-        <h1 class="text-5xl sm:text-8xl font-chalk font-bold text-amber-200 tracking-wider drop-shadow-2xl">
-          Happy Teachers' Day!
+      <!-- Big Stage Title -->
+      <div class="space-y-1">
+        <p class="text-xl sm:text-2xl font-chalk text-emerald-300 font-semibold tracking-wide">
+          Sabhi Respected Teachers & Gurus Ko Dedicated ✨
+        </p>
+        <h1 class="text-5xl sm:text-8xl font-chalk font-black text-amber-200 tracking-wider drop-shadow-2xl">
+          HAPPY TEACHERS' DAY!
         </h1>
       </div>
 
-      <!-- Dynamic Auto-Changing Quote Box -->
-      <div class="py-4 px-6 min-h-[160px] flex items-center justify-center">
-        <div id="quoteContainer" class="quote-fade quote-visible max-w-3xl">
-          <p id="quoteText" class="font-serif-quote italic text-xl sm:text-3xl text-emerald-50 leading-relaxed drop-shadow">
-            "A teacher affects eternity; they can never tell where their influence stops."
+      <!-- Live Shayari Showcase Card -->
+      <div class="min-h-[220px] sm:min-h-[200px] flex items-center justify-center px-4">
+        <div id="shayariCard" class="shayari-box shayari-active max-w-4xl p-6 sm:p-8 rounded-2xl bg-black/40 border border-emerald-500/20 backdrop-blur-md shadow-2xl">
+          <p id="shayariText" class="font-hindi text-2xl sm:text-4xl text-emerald-100 font-bold leading-relaxed drop-shadow-md">
+            "हम तो आए थे क्लास में सिर्फ हाजिरी लगाने...<br>सर ने ऐसा पढ़ाया कि बैठ गए डॉक्टर/इंजीनियर बनने!"
           </p>
-          <span id="quoteAuthor" class="inline-block mt-3 text-xs sm:text-sm uppercase tracking-widest text-amber-300 font-bold">
-            — Henry Adams
-          </span>
+          <div class="mt-4 flex items-center justify-center gap-2">
+            <span class="h-[2px] w-8 bg-amber-400"></span>
+            <span id="shayariTag" class="text-xs sm:text-sm uppercase tracking-widest text-amber-300 font-bold font-chalk">
+              — Attendance & Ambition 😅
+            </span>
+            <span class="h-[2px] w-8 bg-amber-400"></span>
+          </div>
         </div>
       </div>
 
-      <!-- Quick Interactive Stage Trigger -->
-      <div class="pt-2 flex justify-center items-center gap-4">
-        <button onclick="triggerGrandCelebration()" class="px-8 py-3.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-extrabold rounded-2xl shadow-2xl shadow-amber-500/30 active:scale-95 transition-all text-base sm:text-lg flex items-center gap-2">
-          <span>🎉 Celebrate Now</span>
+      <!-- Center Touch Button (for stage entry/cake cutting) -->
+      <div class="pt-1">
+        <button onclick="blastStageFireworks()" class="px-8 py-3 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 active:scale-95 text-slate-950 font-black rounded-2xl shadow-xl shadow-amber-400/20 transition text-base sm:text-lg flex items-center gap-2 mx-auto">
+          <span>🎊 Taaliyan & Fireworks 🎊</span>
         </button>
       </div>
 
     </main>
 
-    <!-- Bottom Info / Controls Bar -->
-    <footer class="flex items-center justify-between text-xs sm:text-sm text-emerald-200/60 z-20 border-t border-emerald-900/50 pt-4">
+    <!-- Bottom Stage Info Bar -->
+    <footer class="flex items-center justify-between text-xs sm:text-sm text-emerald-300/70 z-20 border-t border-emerald-900/50 pt-3">
       <div class="flex items-center gap-4">
-        <span>Press <kbd class="px-2 py-0.5 rounded bg-white/10 text-amber-200 font-mono text-xs">Space</kbd> for Fireworks</span>
+        <span>Touch anywhere / <kbd class="px-2 py-0.5 rounded bg-white/10 text-amber-200 font-mono text-xs">Space</kbd> for Celebration</span>
         <span>•</span>
         <span>Press <kbd class="px-2 py-0.5 rounded bg-white/10 text-amber-200 font-mono text-xs">F</kbd> for Fullscreen</span>
       </div>
-      <div class="font-medium tracking-wide">
-        From all the students with sincere gratitude ❤️
+      <div class="font-hindi text-base text-amber-200/90 font-bold">
+        "Sir, aaj homework mat poochna please!" 🤫
       </div>
     </footer>
 
-    <!-- Background Decorative Chalk Equations / Elements -->
-    <div class="absolute inset-0 pointer-events-none opacity-10 flex flex-col justify-between p-10 font-chalk text-3xl select-none">
-      <div class="flex justify-between">
-        <span>E = mc²</span>
-        <span>∫ f(x) dx</span>
-        <span>PV = nRT</span>
+    <!-- Background Floating Nostalgic Dialogues & Chalk Doodles -->
+    <div class="absolute inset-0 pointer-events-none z-10 flex flex-col justify-between p-8 font-chalk select-none opacity-20 text-emerald-100 text-xl sm:text-2xl">
+      <div class="flex justify-between items-start">
+        <span class="floating-dialogue">"Is this a fish market?!" 🐟</span>
+        <span>Σ(Hardwork) = Success</span>
+        <span class="floating-dialogue">"Last benchers, stand up!" 🧍‍♂️</span>
       </div>
-      <div class="flex justify-between">
-        <span>F = ma</span>
-        <span>DNA ➔ RNA ➔ Protein</span>
-        <span>λ = h / p</span>
+      <div class="flex justify-between items-center">
+        <span>"Don't look outside the window!" 👀</span>
+        <span class="floating-dialogue text-3xl text-amber-200 font-bold">"Pin drop silence!" 🤫</span>
+        <span>"The bell is for me, not for you!" ⏰</span>
+      </div>
+      <div class="flex justify-between items-end">
+        <span>"Who is laughing in that corner?" 🤔</span>
+        <span>d/dx (Confusion) = Clarity</span>
+        <span class="floating-dialogue">"Kal sabke parents chahiye!" 📝</span>
       </div>
     </div>
 
@@ -146,91 +163,89 @@
 
   <script>
     // Live Digital Clock
-    function updateClock() {
+    function runClock() {
       const now = new Date();
-      document.getElementById('liveClock').innerText = now.toLocaleTimeString('en-US', {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: true
+      document.getElementById('liveClock').innerText = now.toLocaleTimeString('en-IN', {
+        hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
       });
     }
-    setInterval(updateClock, 1000);
-    updateClock();
+    setInterval(runClock, 1000);
+    runClock();
 
-    // Curated High-Impact Quotes for Classroom Display
-    const quotes = [
+    // Funny, Relatable & Respectful Classroom Shayaris
+    const shayaris = [
       {
-        text: "A teacher affects eternity; they can never tell where their influence stops.",
-        author: "Henry Adams"
+        text: "हम तो आए थे क्लास में सिर्फ हाजिरी लगाने...<br>सर ने ऐसा पढ़ाया कि बैठ गए कुछ बड़ा बनने!",
+        tag: "True Backbencher Transformation 😂"
       },
       {
-        text: "Thank you for turning our doubts into clarity, and our efforts into confidence.",
-        author: "Classroom Dedication"
+        text: "जब भी लगा कि अब दिमाग का फ्यूज उड़ने वाला है,<br>सर बोले: 'रुको बेटा, अभी तो असली सवाल आने वाला है!'",
+        tag: "Concept Clarity Terror 💀"
       },
       {
-        text: "The art of teaching is the art of assisting discovery.",
-        author: "Mark Van Doren"
+        text: "वो डांट में भी हमारे भले का ख्वाब रखते हैं,<br>हम कितने भी सवाल पूछें, सर हर बार जवाब रखते हैं!",
+        tag: "Infinite Patience ❤️"
       },
       {
-        text: "Behind every cleared concept and conquered exam is a teacher who believed first.",
-        author: "Grateful Students"
+        text: "सर का वो एक खौफनाक डायलॉग: 'Last benchers खड़े हो जाओ!'<br>और दिल की धड़कन 72 से सीधे 180 पार!",
+        tag: "Cardiology Practical 🩺"
       },
       {
-        text: "Education is not the filling of a pail, but the lighting of a fire.",
-        author: "W.B. Yeats"
+        text: "किताबें तो बाजार में बहुत मिलती हैं जनाब,<br>पर कौन सा पन्ना जिंदगी बदलेगा, ये सिर्फ टीचर सिखाते हैं!",
+        tag: "True Mentorship 🌟"
       },
       {
-        text: "Teaching is the one profession that creates all other professions.",
-        author: "Unknown"
+        text: "सर कहते थे: 'यही सवाल एग्जाम में 4 नंबर का आएगा'...<br>और वही सवाल आज जिंदगी संवार के जाएगा!",
+        tag: "Legendary Predictions 🎯"
+      },
+      {
+        text: "हमारी नादानियों पर भी मुस्कुरा कर समझाया,<br>जीरो से उठाकर आज हमें इस काबिल बनाया!",
+        tag: "Salute to Teachers 💐"
       }
     ];
 
-    let currentQuoteIndex = 0;
-    const quoteContainer = document.getElementById('quoteContainer');
-    const quoteText = document.getElementById('quoteText');
-    const quoteAuthor = document.getElementById('quoteAuthor');
+    let currentIndex = 0;
+    const shayariCard = document.getElementById('shayariCard');
+    const shayariText = document.getElementById('shayariText');
+    const shayariTag = document.getElementById('shayariTag');
 
-    function rotateQuote() {
+    function nextShayari() {
       // Fade out
-      quoteContainer.classList.remove('quote-visible');
-      quoteContainer.classList.add('quote-hidden');
+      shayariCard.classList.remove('shayari-active');
+      shayariCard.classList.add('shayari-hidden');
 
       setTimeout(() => {
-        currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
-        quoteText.innerText = `"${quotes[currentQuoteIndex].text}"`;
-        quoteAuthor.innerText = `— ${quotes[currentQuoteIndex].author}`;
+        currentIndex = (currentIndex + 1) % shayaris.length;
+        shayariText.innerHTML = `"${shayaris[currentIndex].text}"`;
+        shayariTag.innerText = `— ${shayaris[currentIndex].tag}`;
 
         // Fade in
-        quoteContainer.classList.remove('quote-hidden');
-        quoteContainer.classList.add('quote-visible');
-      }, 700);
+        shayariCard.classList.remove('shayari-hidden');
+        shayariCard.classList.add('shayari-active');
+      }, 600);
     }
 
-    // Auto rotate every 8 seconds
-    setInterval(rotateQuote, 8000);
+    // Auto rotate shayari every 7 seconds
+    setInterval(nextShayari, 7000);
 
-    // Grand Stage Confetti Blast (Left + Right Cannons)
-    function triggerGrandCelebration() {
-      const duration = 2.5 * 1000;
-      const end = Date.now() + duration;
-
+    // Continuous Grand Stage Fireworks (Left + Right Cannons)
+    function blastStageFireworks() {
+      const end = Date.now() + 2500;
       (function frame() {
         confetti({
-          particleCount: 5,
+          particleCount: 6,
           angle: 60,
-          spread: 60,
-          origin: { x: 0, y: 0.75 },
-          colors: ['#fde68a', '#34d399', '#60a5fa', '#f43f5e']
+          spread: 65,
+          origin: { x: 0, y: 0.8 },
+          colors: ['#fde68a', '#34d399', '#38bdf8', '#fb7185', '#fbbf24']
         });
         confetti({
-          particleCount: 5,
+          particleCount: 6,
           angle: 120,
-          spread: 60,
-          origin: { x: 1, y: 0.75 },
-          colors: ['#fde68a', '#34d399', '#60a5fa', '#f43f5e']
+          spread: 65,
+          origin: { x: 1, y: 0.8 },
+          colors: ['#fde68a', '#34d399', '#38bdf8', '#fb7185', '#fbbf24']
         });
-
         if (Date.now() < end) {
           requestAnimationFrame(frame);
         }
@@ -242,27 +257,33 @@
       if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen().catch(() => {});
       } else {
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        }
+        if (document.exitFullscreen) document.exitFullscreen();
       }
     }
 
-    // Keyboard Shortcuts for Teacher / Presenter on Stage
+    // Keyboard Shortcuts
     window.addEventListener('keydown', (e) => {
       if (e.code === 'Space') {
         e.preventDefault();
-        triggerGrandCelebration();
+        blastStageFireworks();
       } else if (e.key === 'f' || e.key === 'F') {
         e.preventDefault();
         toggleFullscreen();
       }
     });
 
-    // Auto-blast once when board screen starts
+    // Touch screen par kahin bhi click hone par celebration (sirf buttons pe double trigger na ho)
+    document.addEventListener('click', (e) => {
+      if (e.target.tagName !== 'BUTTON') {
+        blastStageFireworks();
+      }
+    });
+
+    // Auto start on launch
     window.addEventListener('DOMContentLoaded', () => {
-      setTimeout(triggerGrandCelebration, 600);
+      setTimeout(blastStageFireworks, 800);
     });
   </script>
 </body>
-</html>
+          </html>
+          
