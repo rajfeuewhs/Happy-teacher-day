@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Teachers' Day | Smartboard Backdrop</title>
+  <title>Happy Teachers' Day | NEET Classroom Special</title>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -13,7 +13,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Kalam:wght@400;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Plus+Jakarta+Sans:wght@700;800&family=Outfit:wght@600;800&display=swap" rel="stylesheet">
 
   <style>
     * {
@@ -25,14 +25,14 @@
       background-color: #020704;
       font-family: 'Plus Jakarta Sans', sans-serif;
     }
-    .font-hindi {
-      font-family: 'Kalam', cursive;
-    }
     .font-chalk {
       font-family: 'Caveat', cursive;
     }
+    .font-display {
+      font-family: 'Outfit', sans-serif;
+    }
 
-    /* Cinematic Blackboard Frame */
+    /* Blackboard Frame Styling */
     .smartboard-screen {
       background: radial-gradient(circle at 50% 45%, #102e1f 0%, #081a11 65%, #020704 100%);
       box-shadow: inset 0 0 140px rgba(0, 0, 0, 0.95);
@@ -40,15 +40,13 @@
       outline: 4px solid #1a0e08;
     }
 
-    /* Subtle Blackboard Grid Lines */
     .board-grid {
       background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0);
       background-size: 30px 30px;
     }
 
-    /* Smooth Shayari Fade */
     .shayari-box {
-      transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+      transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
     }
     .shayari-hidden {
       opacity: 0;
@@ -59,20 +57,16 @@
       transform: translateY(0) scale(1);
     }
 
-    /* Floating chalk doodle animation */
-    @keyframes floatDialogue {
+    /* Floating Chalk Elements */
+    @keyframes floatText {
       0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-12px) rotate(1.5deg); }
+      50% { transform: translateY(-10px) rotate(1deg); }
     }
-    .floating-text {
-      animation: floatDialogue 5s ease-in-out infinite;
-    }
-    .floating-text-delayed {
-      animation: floatDialogue 6s ease-in-out infinite;
-      animation-delay: 2.5s;
+    .floating-item {
+      animation: floatText 5s ease-in-out infinite;
     }
 
-    /* Marquee horizontal ticker */
+    /* Marquee Running Ticker */
     @keyframes marqueeAnimation {
       0% { transform: translateX(0%); }
       100% { transform: translateX(-50%); }
@@ -89,116 +83,101 @@
 
   <div class="smartboard-screen board-grid relative w-full h-full rounded-3xl flex flex-col justify-between p-6 sm:p-10 overflow-hidden shadow-2xl">
 
-    <!-- Top Status Bar -->
+    <!-- Top Status Header -->
     <header class="flex items-center justify-between z-20">
-      <div class="flex items-center gap-3">
-        <span class="px-4 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs sm:text-sm font-bold tracking-wider uppercase flex items-center gap-2">
-          <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping"></span>
-          🎉 Happy Teachers' Day • The Unofficial Classroom Diary
-        </span>
-      </div>
+      <span class="px-4 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs sm:text-sm font-bold tracking-wider uppercase flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-ping"></span>
+        🩺 NEET Aspirants & Gurus • Mission 720/720
+      </span>
 
-      <div class="text-right flex items-center gap-3">
-        <div id="liveClock" class="text-lg sm:text-2xl font-mono font-bold text-amber-200 drop-shadow">
-          00:00:00 AM
-        </div>
+      <div id="liveClock" class="text-lg sm:text-2xl font-mono font-bold text-amber-200 drop-shadow">
+        00:00:00 AM
       </div>
     </header>
 
-    <!-- Center Stage: Big Heading & Rotating Humorous Shayaris -->
+    <!-- Center Stage Hero Section -->
     <main class="my-auto text-center z-20 max-w-5xl mx-auto w-full space-y-6">
-      
-      <!-- Big Stage Title -->
       <div class="space-y-1">
-        <p class="text-xl sm:text-2xl font-chalk text-emerald-300 font-semibold tracking-wide">
-          To The Creators of Future Doctors, Engineers & Legend Backbenchers 🎓
+        <p class="text-xl sm:text-2xl font-chalk text-emerald-300 font-bold tracking-wide">
+          Guru Bhi Humare, Bestie Bhi Humare! 😂🔥
         </p>
         <h1 class="text-5xl sm:text-8xl font-chalk font-black text-amber-200 tracking-wider drop-shadow-2xl">
           HAPPY TEACHERS' DAY!
         </h1>
       </div>
 
-      <!-- Live Dynamic Shayari Showcase Card -->
-      <div class="min-h-[220px] flex items-center justify-center px-4">
-        <div id="shayariCard" class="shayari-box shayari-active max-w-4xl w-full p-6 sm:p-8 rounded-2xl bg-black/45 border border-emerald-500/30 backdrop-blur-md shadow-2xl">
-          <p id="shayariText" class="font-hindi text-2xl sm:text-4xl text-emerald-100 font-bold leading-relaxed drop-shadow-md">
-            "हम तो आए थे क्लास में सिर्फ हाजिरी लगाने...<br>सर ने ऐसा पढ़ाया कि बैठ गए कुछ बड़ा बनने!"
+      <!-- Live Dynamic Shayari Card -->
+      <div class="min-h-[230px] flex items-center justify-center px-4">
+        <div id="shayariCard" class="shayari-box shayari-active max-w-4xl w-full p-6 sm:p-8 rounded-2xl bg-black/60 border-2 border-amber-400/40 backdrop-blur-md shadow-2xl">
+          <p id="shayariText" class="font-display text-xl sm:text-3xl text-amber-100 font-bold leading-relaxed drop-shadow-md">
+            "Bio me 360 laane ka sapna sajate hain,<br>Aur Physics me 'Option B' Bhagwan bharose laga aate hain!"
           </p>
           <div class="mt-4 flex items-center justify-center gap-3">
             <span class="h-[2px] w-8 bg-amber-400"></span>
             <span id="shayariTag" class="text-xs sm:text-sm uppercase tracking-widest text-amber-300 font-bold font-chalk">
-              — Attendance Scam Se Future Topper 😂
+              — Balanced Preparation Myth 🧬🎲
             </span>
             <span class="h-[2px] w-8 bg-amber-400"></span>
           </div>
         </div>
       </div>
 
-      <!-- Stage Buttons -->
+      <!-- Fireworks Action Button -->
       <div class="flex justify-center items-center gap-4 pt-1">
-        <button onclick="triggerGrandFireworks()" class="px-8 py-3 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 active:scale-95 text-slate-950 font-black rounded-2xl shadow-xl shadow-amber-400/25 transition text-base sm:text-lg flex items-center gap-2">
-          <span>🎊 Shabaashi & Fireworks 🎊</span>
+        <button onclick="triggerGrandFireworks()" class="px-8 py-3 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 active:scale-95 text-slate-950 font-black rounded-2xl shadow-xl transition text-base sm:text-lg flex items-center gap-2">
+          <span>🎊 AIIMS Rank-1 Celebration & Fireworks 🎊</span>
         </button>
       </div>
-
     </main>
 
-    <!-- Bottom Running Ticker for Legendary Dialogues -->
+    <!-- Bottom Ticker & Status -->
     <div class="z-20 border-t border-emerald-900/60 pt-3 space-y-2">
-      <!-- Continuous Dialogue Marquee -->
-      <div class="overflow-hidden w-full bg-black/40 py-1.5 rounded-xl border border-emerald-500/10">
+      <div class="overflow-hidden w-full bg-black/50 py-2 rounded-xl border border-emerald-500/20">
         <div class="marquee-track font-chalk text-base sm:text-xl text-amber-200/90 gap-10">
-          <span>📢 "You are the worst batch I have ever taught in my life!"</span>
+          <span>📢 "Sir: 'Krebs Cycle yaad hui ya lunch box kholu?'"</span>
           <span>•</span>
-          <span>📢 "Sir, attendance laga do please, emergency me washroom gaya tha!"</span>
+          <span>📢 "Sir: 'NCERT ki har line Bible hai, ghol ke pee jao!'"</span>
           <span>•</span>
-          <span>📢 "Why are you looking at each other's faces? Answers blackboard pe hain!"</span>
+          <span>📢 "Sir: 'Why are you looking outside? Paper blackboard pe se banega!'"</span>
           <span>•</span>
-          <span>📢 "Pin-drop silence! Awaz aayi toh sabko bahar khada kar dunga!"</span>
+          <span>📢 "Sir: 'Tum log meri naak kataoge!' — Sir, pehle syllabus toh time pe karao!"</span>
           <span>•</span>
-          <span>📢 "Yes, the boy in the third row, what was my last sentence?"</span>
+          <span>📢 "Sir: 'Krebs Cycle yaad hui ya lunch box kholu?'"</span>
           <span>•</span>
-          <span>📢 "The bell is for me, not for you! Baitho chup chaap!"</span>
-          <span>•</span>
-          <span>📢 "You are the worst batch I have ever taught in my life!"</span>
-          <span>•</span>
-          <span>📢 "Sir, attendance laga do please, emergency me washroom gaya tha!"</span>
-          <span>•</span>
-          <span>📢 "Why are you looking at each other's faces? Answers blackboard pe hain!"</span>
+          <span>📢 "Sir: 'NCERT ki har line Bible hai, ghol ke pee jao!'"</span>
         </div>
       </div>
 
-      <!-- Controls & Credit Bar -->
       <div class="flex items-center justify-between text-xs text-emerald-300/60 px-1">
         <div class="flex items-center gap-3">
-          <span>Automatic Fireworks Active 🎆</span>
+          <span>Auto Fireworks Active 🎆</span>
           <span>•</span>
           <span>Press <kbd class="px-2 py-0.5 rounded bg-white/10 text-amber-200 font-mono text-xs">F</kbd> for Fullscreen</span>
           <span>•</span>
-          <span>Touch anywhere for extra blast!</span>
+          <span>Press <kbd class="px-2 py-0.5 rounded bg-white/10 text-amber-200 font-mono text-xs">Space</kbd> for Celebration</span>
         </div>
-        <div class="font-hindi text-sm text-amber-200/90 font-bold">
+        <div class="font-chalk text-base text-amber-200/90 font-bold">
           "Sir, aaj bas baatein karte hain, padhai nahi!" 🤫
         </div>
       </div>
     </div>
 
-    <!-- Background Floating Nostalgic Dialogues & Chalk Elements -->
-    <div class="absolute inset-0 pointer-events-none z-10 flex flex-col justify-between p-8 font-chalk select-none opacity-25 text-emerald-100 text-xl sm:text-2xl">
-      <div class="flex justify-between items-start">
-        <span class="floating-text">"Is this a classroom or a vegetable market?!" 🥦</span>
-        <span>e^(iπ) + 1 = 0</span>
-        <span class="floating-text-delayed">"Last benchers, stand on the bench!" 🧍‍♂️</span>
+    <!-- Floating Background Elements -->
+    <div class="absolute inset-0 pointer-events-none z-10 flex flex-col justify-between p-8 font-chalk select-none opacity-20 text-white text-2xl">
+      <div class="flex justify-between">
+        <span class="floating-item">Target 720/720 🩺</span>
+        <span>E = mc²</span>
+        <span class="floating-item">"Doubt class me milo!" 💀</span>
       </div>
-      <div class="flex justify-between items-center">
-        <span>"Don't look at the watch, 10 min extra lenge!" ⏰</span>
-        <span class="floating-text text-3xl sm:text-4xl text-amber-200 font-bold">"Chalk fek ke marunga!" 🎯</span>
-        <span class="floating-text-delayed">"Kal bina assignment ke entry nahi hai!" 🚫</span>
+      <div class="flex justify-between">
+        <span>"Units check kiye?!" 🤦‍♂️</span>
+        <span class="text-4xl text-amber-300 font-bold">"Worst Batch Ever!" 🏆</span>
+        <span>"Option B Bhagwan Bharose!" 🎲</span>
       </div>
-      <div class="flex justify-between items-end mb-12">
-        <span class="floating-text-delayed">"Kis baat par hassi aa rahi hai? Hamein bhi batao!" 🤨</span>
-        <span>Proxy Attendance = 404 Not Found</span>
-        <span class="floating-text">"Surprise Test incoming!" 😱</span>
+      <div class="flex justify-between mb-12">
+        <span class="floating-item">"Negative Marking Se Bacho!" 📉</span>
+        <span>Future AIIMS Doctors 🥼</span>
+        <span>"Proxy pakdi gayi!" 📝</span>
       </div>
     </div>
 
@@ -215,39 +194,39 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Ultimate Funny, Relatable & Heartwarming Classroom Shayaris
+    // Selected Hinglish NEET & Comedy Shayaris
     const shayaris = [
       {
-        text: "हम तो आए थे क्लास में सिर्फ हाजिरी लगाने...<br>सर ने ऐसा पढ़ाया कि बैठ गए कुछ बड़ा बनने!",
-        tag: "Attendance To Ambition 😂"
+        text: "Bio me 360 laane ka sapna sajate hain,<br>Aur Physics me 'Option B' Bhagwan bharose laga aate hain!",
+        tag: "Balanced Preparation Myth 🧬🎲"
       },
       {
-        text: "सर का वो क्लासिक डायलॉग आज भी याद है:<br>'You are the worst batch I have ever seen!'<br>...मगर दिल से जानते हैं, प्यार भी सबसे ज्यादा हमसे ही किया!",
-        tag: "Every Teacher's Favorite Lie ❤️"
+        text: "Reaction mechanism yaad karne me poori raat nikal gayi,<br>Subah paper dekha toh catalyst hi dimaag se phisal gayi!",
+        tag: "SN1 vs SN2 Dilemma 🧪🤯"
       },
       {
-        text: "जब भी लगा कि अब दिमाग का फ्यूज उड़ने वाला है,<br>सर बोले: 'रुको बेटा, असली 5 नंबर का सवाल तो अब आने वाला है!'",
-        tag: "Concept Clarity Terror 💀"
+        text: "Stethoscope gale me daalne ki zid me neend chain sab chhod diya,<br>Mock test ke marks ne toda toh kya, agle din fir revision jod diya!",
+        tag: "White Coat Passion 🩺🔥"
       },
       {
-        text: "सर कहते थे: 'Blackboard पे देखो, खिड़की से बाहर कोई नंबर नहीं देगा!'<br>आज समझ आया, वो बाहर की दुनिया से ज्यादा हमारे अंदर देख रहे थे!",
-        tag: "Eagle Vision Mentor 🦅"
+        text: "Sir bolte hain: 'Hans kyu rahe ho, mujhe bhi batao, hum sab hansenge!'<br>Sir, agar aapko bata diya toh fir sirf aapke haath chalenge!",
+        tag: "Extreme Risk Factor 🏃‍♂️💨"
       },
       {
-        text: "बैकबेंच पर बैठ कर जो जुगाड़ हमने लगाए हैं,<br>सर को पहले से पता थे, वो खुद इस रस्ते से आए हैं!",
-        tag: "Pro Max Guru 🫡"
+        text: "Sir bolte hain: 'Tum sab meri naak kataoge exam me!'<br>Sir, humari chhodo, pehle syllabus toh time pe poora karao!",
+        tag: "Reverse Counter Attack 🎯🤣"
       },
       {
-        text: "कितने टेस्ट पेपर पर लाल कलम से जीरो बनाया,<br>पर हर बार डांट के बाद अकेले में हौसला भी बढ़ाया!",
-        tag: "True Mentorship 🌟"
+        text: "Sir bole: '2 minute me aa raha hoon, chupchaap sawaal karo!'<br>Aur khud 45 minute tak staff room me samose daba rahe the!",
+        tag: "Sir Ka Famous 2-Minute Scam ☕💀"
       },
       {
-        text: "सर का खौफनाक सवाल: 'हाँ भाई, कल क्या पढ़ाया था?'<br>और पूरी क्लास ऐसे शांत, जैसे किसी ICU वार्ड में बैठी हो!",
-        tag: "Sudden Heart Attack 📈"
+        text: "Jab sir board par likhte-likhte peeche mudte hain,<br>Poori class aise seedhi baithti hai jaise police ki raid pad gayi ho!",
+        tag: "CCTV Camera 360° 📹🚨"
       },
       {
-        text: "किताबों की दुनिया में हम भटक ही जाते जनाब,<br>अगर सर ने उंगली पकड़ कर मंजिल का रास्ता न दिखाया होता!",
-        tag: "Forever Grateful 💐"
+        text: "Chalo jo bhi kaho, sir daant-te bhale hi baap ki tarah hain,<br>Par sach ye hai ki humare dil me baste bhi apne yaar ki tarah hain!",
+        tag: "End of Roast: We Love You Sir! ❤️🙌"
       }
     ];
 
@@ -267,57 +246,43 @@
 
         shayariCard.classList.remove('shayari-hidden');
         shayariCard.classList.add('shayari-active');
-      }, 500);
+      }, 400);
     }
 
-    // Auto rotate shayari every 7.5 seconds
+    // Har 7.5 second me shayari change
     setInterval(rotateShayari, 7500);
 
-    // Continuous Grand Stage Fireworks (Left + Right Cannons)
+    // Stage Fireworks Blast
     function triggerGrandFireworks() {
-      const end = Date.now() + 2200;
+      const end = Date.now() + 2000;
       (function frame() {
         confetti({
-          particleCount: 6,
+          particleCount: 7,
           angle: 60,
           spread: 65,
           origin: { x: 0, y: 0.8 },
           colors: ['#fde68a', '#34d399', '#38bdf8', '#fb7185', '#fbbf24']
         });
         confetti({
-          particleCount: 6,
+          particleCount: 7,
           angle: 120,
           spread: 65,
           origin: { x: 1, y: 0.8 },
           colors: ['#fde68a', '#34d399', '#38bdf8', '#fb7185', '#fbbf24']
         });
-        if (Date.now() < end) {
-          requestAnimationFrame(frame);
-        }
+        if (Date.now() < end) requestAnimationFrame(frame);
       })();
     }
 
-    // Subtle Auto Fireworks (Har 14 second me ambient celebration)
-    function ambientCelebration() {
+    // Auto fireworks har 12 second me
+    setInterval(() => {
       confetti({
         particleCount: 35,
-        spread: 100,
+        spread: 90,
         origin: { x: Math.random() * 0.6 + 0.2, y: 0.35 },
-        colors: ['#fbbf24', '#34d399', '#f43f5e', '#60a5fa'],
-        disableForReducedMotion: true
+        colors: ['#fbbf24', '#34d399', '#f43f5e', '#60a5fa']
       });
-    }
-    // Har 14 second me automatic background blast
-    setInterval(ambientCelebration, 14000);
-
-    // Fullscreen Toggle
-    function toggleFullscreen() {
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch(() => {});
-      } else {
-        if (document.exitFullscreen) document.exitFullscreen();
-      }
-    }
+    }, 12000);
 
     // Keyboard Shortcuts
     window.addEventListener('keydown', (e) => {
@@ -326,21 +291,25 @@
         triggerGrandFireworks();
       } else if (e.key === 'f' || e.key === 'F') {
         e.preventDefault();
-        toggleFullscreen();
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        } else {
+          if (document.exitFullscreen) document.exitFullscreen();
+        }
       }
     });
 
-    // Touch screen par click se instant grand fireworks
+    // Touch / click anywhere triggers fireworks
     document.addEventListener('click', (e) => {
       if (e.target.tagName !== 'BUTTON') {
         triggerGrandFireworks();
       }
     });
 
-    // Initial blast on load
     window.addEventListener('DOMContentLoaded', () => {
-      setTimeout(triggerGrandFireworks, 600);
+      setTimeout(triggerGrandFireworks, 500);
     });
   </script>
 </body>
-</html>
+  </html>
+  
