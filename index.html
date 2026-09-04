@@ -1,614 +1,362 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Target720 - NEET Examination Portal</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --bg-body: #0a0f1d;
-            --bg-card: #141b2d;
-            --bg-card-hover: #1e293b;
-            --accent: #3b82f6;
-            --accent-glow: rgba(59, 130, 246, 0.25);
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --success: #10b981;
-            --danger: #ef4444;
-            --border-color: #242f49;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Teachers' Day | Mentors Eduserv NEET Special</title>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-        html, body {
-            width: 100vw;
-            min-height: 100vh;
-            min-height: 100dvh;
-            background-color: var(--bg-body);
-            color: var(--text-primary);
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            overflow-x: hidden;
-            overflow-y: auto;
-        }
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800;900&family=Caveat:wght@700&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-body);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--border-color);
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent);
-        }
+  <style>
+    * {
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    body {
+      overflow: hidden;
+      background-color: #060e1a;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .font-chalk {
+      font-family: 'Caveat', cursive;
+    }
+    .font-brand {
+      font-family: 'Outfit', sans-serif;
+    }
 
-        /* Navbar */
-        .navbar {
-            width: 100%;
-            height: 65px;
-            background: var(--bg-card);
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 24px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+    /* Mentors Eduserv Corporate Institute Frame */
+    .institute-frame {
+      background: radial-gradient(circle at 50% 30%, #0d223f 0%, #09172c 60%, #050d1a 100%);
+      border: 6px solid #1e3a5f;
+      box-shadow: 0 0 80px rgba(10, 25, 47, 0.9), inset 0 0 100px rgba(0, 0, 0, 0.85);
+    }
 
-        .brand-logo {
-            font-size: 1.4rem;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            color: var(--text-primary);
-        }
-        .brand-logo span {
-            color: var(--accent);
-        }
+    /* Dynamic Shayari Transitions */
+    .shayari-box {
+      transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+    }
+    .shayari-hidden {
+      opacity: 0;
+      transform: translateY(15px) scale(0.97);
+    }
+    .shayari-active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
 
-        .teacher-badge {
-            background: rgba(59, 130, 246, 0.15);
-            color: var(--accent);
-            border: 1px solid var(--accent);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            display: none;
-        }
+    /* Running News Ticker */
+    @keyframes marqueeRun {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marqueeRun 30s linear infinite;
+    }
 
-        .fs-toggle-btn {
-            background: #1f293d;
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            padding: 8px 14px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.2s;
-        }
-        .fs-toggle-btn:hover {
-            color: var(--text-primary);
-            border-color: var(--accent);
-        }
-
-        /* Main Viewport */
-        .viewport-wrapper {
-            width: 100%;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 24px;
-            min-height: calc(100dvh - 65px);
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* NEET SIDE FLOATING COUNTDOWN */
-        .neet-countdown-sidebar {
-            position: fixed;
-            right: 20px;
-            top: 85px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 14px 16px;
-            text-align: center;
-            z-index: 90;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-        }
-        .neet-countdown-sidebar h4 {
-            font-size: 0.8rem;
-            color: var(--danger);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-        }
-        .timer-digits-grid {
-            display: flex;
-            gap: 8px;
-        }
-        .time-unit-box {
-            background: #0f1629;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 6px 8px;
-            min-width: 48px;
-        }
-        .time-val {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: var(--accent);
-            display: block;
-        }
-        .time-lbl {
-            font-size: 0.65rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-        }
-
-        @media (max-width: 850px) {
-            .neet-countdown-sidebar {
-                position: static;
-                margin-bottom: 20px;
-                width: 100%;
-            }
-            .timer-digits-grid {
-                justify-content: center;
-            }
-        }
-
-        /* Subject View */
-        #subject-view {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            flex-grow: 1;
-        }
-        .hero-banner {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .hero-banner h1 {
-            font-size: clamp(1.8rem, 4vw, 2.4rem);
-            margin-bottom: 8px;
-        }
-        .hero-banner p {
-            color: var(--text-secondary);
-        }
-
-        .subject-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
-            width: 100%;
-        }
-
-        .subject-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 35px 25px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.25s ease;
-        }
-        .subject-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-            background: var(--bg-card-hover);
-            box-shadow: 0 10px 25px var(--accent-glow);
-        }
-        .subject-card i {
-            font-size: 42px;
-            color: var(--accent);
-            margin-bottom: 16px;
-        }
-
-        /* Shayari & Teacher Modal */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(5px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 200;
-            padding: 20px;
-        }
-        .modal-content {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 18px;
-            max-width: 500px;
-            width: 100%;
-            padding: 30px 25px;
-            text-align: center;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-            animation: popIn 0.25s ease-out;
-        }
-        @keyframes popIn {
-            from { transform: scale(0.9); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        .shayari-box {
-            background: #0f1629;
-            border-left: 4px solid var(--accent);
-            padding: 16px;
-            border-radius: 8px;
-            margin-bottom: 22px;
-            font-style: italic;
-            color: #cbd5e1;
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
-
-        .modal-form label {
-            display: block;
-            text-align: left;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--text-primary);
-            font-size: 0.9rem;
-        }
-        .modal-form input {
-            width: 100%;
-            padding: 14px;
-            border-radius: 10px;
-            background: #0b1120;
-            border: 1px solid var(--border-color);
-            color: #fff;
-            outline: none;
-            margin-bottom: 20px;
-            font-size: 1rem;
-        }
-        .modal-form input:focus {
-            border-color: var(--accent);
-        }
-
-        /* Test Portal View */
-        #test-view {
-            display: none;
-            flex-direction: column;
-            flex-grow: 1;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 18px;
-            padding: 24px;
-            max-height: calc(100dvh - 115px);
-        }
-
-        .test-top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 14px;
-            margin-bottom: 16px;
-        }
-        .test-timer {
-            background: rgba(239, 68, 68, 0.15);
-            border: 1px solid var(--danger);
-            color: #fca5a5;
-            font-weight: 700;
-            padding: 6px 14px;
-            border-radius: 50px;
-            font-size: 0.9rem;
-        }
-
-        /* Scroll Area */
-        .test-scroll-area {
-            flex-grow: 1;
-            overflow-y: auto;
-            padding-right: 8px;
-            margin-bottom: 20px;
-        }
-        .question-meta {
-            color: var(--accent);
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
-        }
-        .question-title {
-            font-size: clamp(1.1rem, 2.5vw, 1.35rem);
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-        .options-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .option-item {
-            background: #101626;
-            border: 1px solid var(--border-color);
-            padding: 15px 18px;
-            border-radius: 12px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .option-item:hover {
-            border-color: var(--accent);
-            background: #172036;
-        }
-        .option-item.active {
-            border-color: var(--accent);
-            background: var(--accent-glow);
-            color: #fff;
-            font-weight: 600;
-        }
-        .option-indicator {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            border: 2px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            flex-shrink: 0;
-        }
-        .option-item.active .option-indicator {
-            border-color: var(--accent);
-            background: var(--accent);
-            color: #fff;
-        }
-
-        /* Footer Controls */
-        .test-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid var(--border-color);
-            padding-top: 16px;
-        }
-
-        .btn {
-            padding: 12px 24px;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            border: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.2s;
-        }
-        .btn-prev { background: #242f49; color: var(--text-primary); }
-        .btn-prev:hover { background: #334155; }
-        .btn-next { background: var(--accent); color: #fff; }
-        .btn-next:hover { opacity: 0.9; }
-        .btn-finish { background: var(--success); color: #fff; display: none; }
-        .btn-finish:hover { opacity: 0.9; }
-
-        /* Result View */
-        #result-view {
-            display: none;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 18px;
-            padding: 35px 24px;
-            text-align: center;
-        }
-        .score-val {
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: var(--success);
-            margin: 15px 0;
-        }
-        .leaderboard-table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-            margin-top: 20px;
-        }
-        .leaderboard-table th {
-            background: #111827;
-            padding: 14px;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            border-bottom: 1px solid var(--border-color);
-        }
-        .leaderboard-table td {
-            padding: 14px;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 0.95rem;
-        }
-
-        .hidden { display: none !important; }
-    </style>
+    /* Floating Formula Watermark Animation */
+    @keyframes floatElement {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    .floating-badge {
+      animation: floatElement 4.5s ease-in-out infinite;
+    }
+  </style>
 </head>
-<body>
 
-    <!-- NAVBAR -->
-    <nav class="navbar">
-        <div class="brand-logo">TARGET<span>720</span></div>
-        <div class="teacher-badge" id="teacher-display">
-            <i class="fas fa-chalkboard-teacher"></i> <span id="teacher-name-text"></span>
+<body class="h-screen w-screen p-3 sm:p-5 flex flex-col justify-center items-center">
+
+  <div class="institute-frame relative w-full h-full rounded-2xl flex flex-col justify-between p-6 sm:p-10 overflow-hidden shadow-2xl">
+
+    <!-- Top Coaching Brand Header With NEET Countdown -->
+    <header class="flex items-center justify-between z-20 border-b border-blue-900/60 pb-4">
+      <div class="flex items-center gap-3">
+        <!-- Mentors Logo Emblem -->
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-amber-500 to-yellow-300 flex items-center justify-center font-brand font-black text-slate-950 text-2xl shadow-lg shadow-amber-500/20">
+          M
         </div>
-        <button class="fs-toggle-btn" onclick="toggleFullScreen()">
-            <i class="fas fa-expand" id="fs-icon"></i> <span id="fs-text">Full Screen</span>
+        <div>
+          <div class="text-xl sm:text-2xl font-black font-brand tracking-tight text-white flex items-center gap-2">
+            MENTORS <span class="text-amber-400">EDUSERV</span>
+          </div>
+          <p class="text-[11px] sm:text-xs font-semibold text-blue-300/80 tracking-wider uppercase">
+            Building Foundation & Results • Medical Division
+          </p>
+        </div>
+      </div>
+
+      <!-- Right Side: NEET Live Countdown & Digital Clock -->
+      <div class="flex items-center gap-3 sm:gap-4">
+        <!-- Live NEET Countdown Box -->
+        <div class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-red-950/70 border border-red-500/40 text-red-200 shadow-md">
+          <span class="text-base sm:text-lg">⏳</span>
+          <div class="text-left">
+            <div class="text-[9px] sm:text-[10px] uppercase font-bold text-red-400 tracking-wider">NEET Countdown</div>
+            <div id="neetCountdown" class="text-xs sm:text-sm font-mono font-black text-white">Calculating...</div>
+          </div>
+        </div>
+
+        <!-- Clock -->
+        <div class="hidden sm:block text-right">
+          <div id="liveClock" class="text-lg sm:text-xl font-mono font-extrabold text-amber-400 drop-shadow">
+            00:00:00 AM
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Center Stage: Presentation Screen -->
+    <main class="my-auto text-center z-20 max-w-5xl mx-auto w-full space-y-6">
+      
+      <!-- Stage Banner -->
+      <div class="space-y-1">
+        <div class="inline-block px-4 py-1 rounded-full bg-blue-950/80 border border-blue-500/30 text-blue-200 text-xs sm:text-sm font-bold uppercase tracking-widest mb-1">
+          5th September • Classroom Stage Celebration
+        </div>
+        <h1 class="text-5xl sm:text-7xl font-brand font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-400 tracking-tight drop-shadow-2xl">
+          HAPPY TEACHERS' DAY!
+        </h1>
+        <p class="text-base sm:text-xl font-semibold text-blue-200/90 font-chalk">
+          To The Pillars Of Mentors Eduserv: Humare Gurus, Mentors & Besties! 🩺🔥
+        </p>
+      </div>
+
+      <!-- Live Dynamic Shayari Display Box -->
+      <div class="min-h-[220px] flex items-center justify-center px-2">
+        <div id="shayariCard" class="shayari-box shayari-active max-w-4xl w-full p-6 sm:p-8 rounded-2xl bg-slate-900/85 border border-amber-400/40 shadow-2xl backdrop-blur-md relative overflow-hidden">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent"></div>
+          
+          <p id="shayariText" class="font-brand text-xl sm:text-3xl text-white font-bold leading-relaxed drop-shadow">
+            "Bio me 360 laane ka sapna sajate hain,<br>Aur Physics me 'Option B' Bhagwan bharose laga aate hain!"
+          </p>
+
+          <div class="mt-4 flex items-center justify-center gap-3">
+            <span class="h-[2px] w-8 bg-amber-400"></span>
+            <span id="shayariTag" class="text-xs sm:text-sm uppercase tracking-widest text-amber-300 font-extrabold">
+              — Balanced Preparation Myth 🧬🎲
+            </span>
+            <span class="h-[2px] w-8 bg-amber-400"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage Button -->
+      <div class="flex justify-center items-center gap-4 pt-1">
+        <button onclick="triggerGrandFireworks()" class="px-8 py-3.5 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:brightness-110 active:scale-95 text-slate-950 font-black rounded-xl shadow-lg shadow-amber-400/20 transition text-base sm:text-lg flex items-center gap-2">
+          <span>🎊 Mentors Topper Taaliyan & Fireworks 🎊</span>
         </button>
-    </nav>
-
-    <!-- FLOATING NEET COUNTDOWN (SIDEBAR) -->
-    <div class="neet-countdown-sidebar">
-        <h4><i class="fas fa-fire"></i> NEET Countdown</h4>
-        <div class="timer-digits-grid">
-            <div class="time-unit-box">
-                <span class="time-val" id="cd-days">00</span>
-                <span class="time-lbl">Days</span>
-            </div>
-            <div class="time-unit-box">
-                <span class="time-val" id="cd-hours">00</span>
-                <span class="time-lbl">Hours</span>
-            </div>
-            <div class="time-unit-box">
-                <span class="time-val" id="cd-mins">00</span>
-                <span class="time-lbl">Mins</span>
-            </div>
-            <div class="time-unit-box">
-                <span class="time-val" id="cd-secs">00</span>
-                <span class="time-lbl">Secs</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- MAIN WRAPPER -->
-    <main class="viewport-wrapper">
-
-        <!-- 1. SUBJECT SELECTION SCREEN -->
-        <section id="subject-view">
-            <div class="hero-banner">
-                <h1>Target720 Practice Portal</h1>
-                <p>Select your subject to trigger the exam session</p>
-            </div>
-            <div class="subject-grid">
-                <div class="subject-card" onclick="openPrepModal('Physics')">
-                    <i class="fas fa-atom"></i>
-                    <h2>Physics</h2>
-                    <p>Mechanics, Electrodynamics & Optics</p>
-                </div>
-                <div class="subject-card" onclick="openPrepModal('Chemistry')">
-                    <i class="fas fa-flask"></i>
-                    <h2>Chemistry</h2>
-                    <p>Physical, Organic & Inorganic</p>
-                </div>
-                <div class="subject-card" onclick="openPrepModal('Biology')">
-                    <i class="fas fa-dna"></i>
-                    <h2>Biology</h2>
-                    <p>Botany, Zoology & Human Physiology</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- MODAL: SHAYARI + AMAN'S FAVOURITE TEACHER QUESTION -->
-        <div class="modal-overlay" id="prep-modal">
-            <div class="modal-content">
-                <h3 style="margin-bottom: 12px; color: var(--accent);">NEET Aspirant Motivation</h3>
-                
-                <div class="shayari-box">
-                    "मंजिल उन्हीं को मिलती है, जिनके सपनों में जान होती है,<br>
-                    पंख से कुछ नहीं होता, हौसलों से उड़ान होती है!"
-                </div>
-
-                <div class="modal-form">
-                    <label for="teacher-input">Aman favourite teacher name?</label>
-                    <input type="text" id="teacher-input" placeholder="e.g. Alakh Pandey Sir / MR Sir / Tanuj Sir" autocomplete="off" />
-                    
-                    <button class="btn btn-next" style="width: 100%; justify-content: center;" onclick="confirmAndStart()">
-                        Enter Full Screen & Start Test <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- 2. TEST INTERFACE (WITH SCROLL CONTAINER) -->
-        <section id="test-view">
-            <div class="test-top-bar">
-                <h3 id="current-sub-title">Subject</h3>
-                <div class="test-timer">
-                    <i class="far fa-clock"></i> <span id="time-left">10:00</span>
-                </div>
-            </div>
-
-            <!-- Scrollable content area -->
-            <div class="test-scroll-area">
-                <div class="question-meta" id="q-counter">Question 1 of 3</div>
-                <div class="question-title" id="q-text">Loading question content...</div>
-                <div class="options-list" id="options-holder"></div>
-            </div>
-
-            <!-- Bottom Fixed Controls -->
-            <div class="test-footer">
-                <button class="btn btn-prev" id="prev-btn" onclick="stepQuestion(-1)">
-                    <i class="fas fa-arrow-left"></i> Previous
-                </button>
-                <button class="btn btn-next" id="next-btn" onclick="stepQuestion(1)">
-                    Next <i class="fas fa-arrow-right"></i>
-                </button>
-                <button class="btn btn-finish" id="finish-btn" onclick="submitTest()">
-                    Finish Test <i class="fas fa-check"></i>
-                </button>
-            </div>
-        </section>
-
-        <!-- 3. RESULT & LEADERBOARD -->
-        <section id="result-view">
-            <h2>Test Analysis & Score</h2>
-            <div class="score-val" id="score-display">0</div>
-            <p style="color: var(--text-secondary);">Marks Scored (+4 Correct, -1 Incorrect)</p>
-
-            <h3 style="text-align: left; margin: 25px 0 10px;">Top Rankers</h3>
-            <div style="overflow-x: auto;">
-                <table class="leaderboard-table">
-                    <thead>
-                        <tr>
-                            <th>Rank</th>
-                            <th>Student</th>
-                            <th>Mentor/Teacher</th>
-                            <th>Score</th>
-                        </tr>
-                    </thead>
-                    <tbody id="lb-records"></tbody>
-                </table>
-            </div>
-
-            <button class="btn btn-next" style="margin: 25px auto 0;" onclick="location.reload()">
-                Back to Dashboard
-            </button>
-        </section>
+      </div>
 
     </main>
 
-<script>
-    // --- NEET EXAM COUNTDOWN LOGIC ---
-    function updateNeetCountdown() {
-        // Target NEET Date: First Sunday of May
-        const now = new Date();
-        let targetYear = now.getFullYear();
-        let examDate = new Date(`May 3, ${targetYear} 14:00:00`);
-        
-        if (now > examDate) {
-            examDate = new Date(`May 2, ${targetYear + 1} 14:00:00`);
-        }
+    <!-- Bottom Ticker & Status -->
+    <div class="z-20 border-t border-blue-900/60 pt-3 space-y-2">
+      <!-- Corporate News Ticker -->
+      <div class="overflow-hidden w-full bg-slate-950/60 py-2 rounded-lg border border-blue-800/40">
+        <div class="marquee-track font-semibold text-sm sm:text-base text-amber-200/90 gap-10">
+          <span>📢 Mentors Faculty Special: "NCERT is the ultimate syllabus key, solve everyday!"</span>
+          <span>•</span>
+          <span>📢 "Aman se pucho: Sir, sabse pyare aur favorite teacher ka naam kya hai?!"</span>
+          <span>•</span>
+          <span>📢 "Sir: 'Krebs Cycle yaad hui ya lunch box kholu?'"</span>
+          <span>•</span>
+          <span>📢 "Sir bolte hain: 'Tum sab meri naak kataoge!' — Sir, pehle syllabus toh time pe poora karao!"</span>
+          <span>•</span>
+          <span>📢 "Mentors Eduserv: Creating Doctors with Concept & Discipline!"</span>
+          <span>•</span>
+          <span>📢 "Aman se pucho: Sir, sabse pyare aur favorite teacher ka naam kya hai?!"</span>
+        </div>
+      </div>
 
-        const diff = examDate - now;
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      <!-- Bottom Info Row -->
+      <div class="flex items-center justify-between text-xs text-blue-300/70 px-1">
+        <div class="flex items-center gap-3">
+          <span class="text-amber-300 font-bold">Auto Fireworks Active 🎆</span>
+          <span>•</span>
+          <span>Press <kbd class="px-2 py-0.5 rounded bg-blue-900/50 text-amber-300 font-mono text-xs">F</kbd> for Fullscreen</span>
+          <span>•</span>
+          <span>Tap screen for blast</span>
+        </div>
+        <div class="font-bold text-sm text-amber-300">
+          Mentors Classroom Division • Sincere Respect To All Faculties 💐
+        </div>
+      </div>
+    </div>
 
-        document.getElementById('cd-days').innerText = String(days).padStart(2, '0');
-        document.getElementById('cd-hours').innerText = String(hours).padStart(2, '0');
-        document.getElementById('cd-mins').innerText = String(minutes).padStart(2, '0');
-        document.getElementById('cd-secs').innerText = String(seconds).padStart(2, '0');
+    <!-- Coaching Watermark Elements -->
+    <div class="absolute inset-0 pointer-events-none z-10 flex flex-col justify-between p-8 font-brand select-none opacity-10 text-white text-3xl font-black">
+      <div class="flex justify-between">
+        <span class="floating-badge">MENTORS EDUSERV</span>
+        <span>Target: AIIMS Delhi 🩺</span>
+        <span class="floating-badge">NEET 720/720</span>
+      </div>
+      <div class="flex justify-between items-center">
+        <span>F = q(E + v × B)</span>
+        <span class="text-5xl text-amber-400 font-black">RESULT PRODUCERS</span>
+        <span>DNA ➔ mRNA ➔ Protein</span>
+      </div>
+      <div class="flex justify-between mb-12">
+        <span class="floating-badge">Discipline • Excellence</span>
+        <span>Rank 1 Mindset</span>
+        <span class="floating-badge">Kavach Test Series</span>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Live Digital Clock
+    function updateClock() {
+      const now = new Date();
+      const clockEl = document.getElementById('liveClock');
+      if (clockEl) {
+        clockEl.innerText = now.toLocaleTimeString('en-IN', {
+          hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
+        });
+      }
     }
-    setInterval(upda
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // NEET Countdown Timer
+    function updateNEETCountdown() {
+      const currentYear = new Date().getFullYear();
+      let targetDate = new Date(`May 2, ${currentYear + 1} 14:00:00`).getTime();
+      const now = new Date().getTime();
+      let diff = targetDate - now;
+
+      if (diff <= 0) {
+        targetDate = new Date(`May 2, ${currentYear + 2} 14:00:00`).getTime();
+        diff = targetDate - now;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('neetCountdown').innerText = `${days}d ${hours}h ${mins}m ${secs}s`;
+    }
+    setInterval(updateNEETCountdown, 1000);
+    updateNEETCountdown();
+
+    // 6 Selected Shayaris (5 NEET/Roast + Aman's Favorite Teacher Mystery)
+    const shayaris = [
+      {
+        text: "Bio me 360 laane ka sapna sajate hain,<br>Aur Physics me 'Option B' Bhagwan bharose laga aate hain!",
+        tag: "Balanced Preparation Myth 🧬🎲"
+      },
+      {
+        text: "Reaction mechanism yaad karne me poori raat nikal gayi,<br>Subah paper dekha toh catalyst hi dimaag se phisal gayi!",
+        tag: "SN1 vs SN2 Dilemma 🧪🤯"
+      },
+      {
+        text: "Stethoscope gale me daalne ki zid me neend chain sab chhod diya,<br>Mock test ke marks ne toda toh kya, agle din fir revision jod diya!",
+        tag: "White Coat Passion 🩺🔥"
+      },
+      {
+        text: "Sir bolte hain: 'Hans kyu rahe ho, mujhe bhi batao, hum sab hansenge!'<br>Sir, agar aapko bata diya toh fir sirf aapke haath chalenge!",
+        tag: "Extreme Risk Factor 🏃‍♂️💨"
+      },
+      {
+        text: "Sir bolte hain: 'Tum sab meri naak kataoge exam me!'<br>Sir, humari chhodo, pehle syllabus toh time pe poora karao!",
+        tag: "Reverse Counter Attack 🎯🤣"
+      },
+      {
+        text: "Poori class bolti hai syllabus bohot tough hai...<br>Par Aman se poocho: 'Bhai, tera favorite teacher kaun hai?!' 😉",
+        tag: "Aman's Secret Favorite Teacher 🤫😂"
+      }
+    ];
+
+    let currentIndex = 0;
+    const shayariCard = document.getElementById('shayariCard');
+    const shayariText = document.getElementById('shayariText');
+    const shayariTag = document.getElementById('shayariTag');
+
+    function rotateShayari() {
+      shayariCard.classList.remove('shayari-active');
+      shayariCard.classList.add('shayari-hidden');
+
+      setTimeout(() => {
+        currentIndex = (currentIndex + 1) % shayaris.length;
+        shayariText.innerHTML = `"${shayaris[currentIndex].text}"`;
+        shayariTag.innerText = `— ${shayaris[currentIndex].tag}`;
+
+        shayariCard.classList.remove('shayari-hidden');
+        shayariCard.classList.add('shayari-active');
+      }, 400);
+    }
+
+    // Auto rotate shayari every 7.5 seconds
+    setInterval(rotateShayari, 7500);
+
+    // Grand Celebration Fireworks
+    function triggerGrandFireworks() {
+      const end = Date.now() + 2000;
+      (function frame() {
+        confetti({
+          particleCount: 7,
+          angle: 60,
+          spread: 65,
+          origin: { x: 0, y: 0.8 },
+          colors: ['#f59e0b', '#3b82f6', '#10b981', '#ffffff']
+        });
+        confetti({
+          particleCount: 7,
+          angle: 120,
+          spread: 65,
+          origin: { x: 1, y: 0.8 },
+          colors: ['#f59e0b', '#3b82f6', '#10b981', '#ffffff']
+        });
+        if (Date.now() < end) requestAnimationFrame(frame);
+      })();
+    }
+
+    // Auto Fireworks har 12 sec me
+    setInterval(() => {
+      confetti({
+        particleCount: 35,
+        spread: 90,
+        origin: { x: Math.random() * 0.6 + 0.2, y: 0.35 },
+        colors: ['#f59e0b', '#60a5fa', '#34d399', '#ffffff']
+      });
+    }, 12000);
+
+    // Fullscreen and keyboard handlers
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') {
+        e.preventDefault();
+        triggerGrandFireworks();
+      } else if (e.key === 'f' || e.key === 'F') {
+        e.preventDefault();
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        } else {
+          if (document.exitFullscreen) document.exitFullscreen();
+        }
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (e.target.tagName !== 'BUTTON') {
+        triggerGrandFireworks();
+      }
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(triggerGrandFireworks, 500);
+    });
+  </script>
+</body>
+    </html>
+    
