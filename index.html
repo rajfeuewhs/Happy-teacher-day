@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Teachers' Day | Mentors Eduserv NEET Special</title>
+  <title>Happy Teachers' Day & Birthday Special | Mentors Eduserv</title>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -19,10 +19,15 @@
     * {
       user-select: none;
       -webkit-user-select: none;
+      box-sizing: border-box;
     }
-    body {
+    html, body {
+      width: 100vw;
+      height: 100vh;
       overflow: hidden;
-      background-color: #060e1a;
+      margin: 0;
+      padding: 0;
+      background-color: #040a14;
       font-family: 'Plus Jakarta Sans', sans-serif;
     }
     .font-chalk {
@@ -32,27 +37,47 @@
       font-family: 'Outfit', sans-serif;
     }
 
-    /* Mentors Eduserv Corporate Institute Frame */
-    .institute-frame {
-      background: radial-gradient(circle at 50% 30%, #0d223f 0%, #09172c 60%, #050d1a 100%);
-      border: 6px solid #1e3a5f;
-      box-shadow: 0 0 80px rgba(10, 25, 47, 0.9), inset 0 0 100px rgba(0, 0, 0, 0.85);
+    /* Auto-fit Smartboard Frame */
+    .smartboard-frame {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 30%, #0d223f 0%, #081729 60%, #040a14 100%);
+      border: 8px solid #1b3557;
+      box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.9);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
-    /* Dynamic Shayari Transitions */
-    .shayari-box {
+    /* Slide transitions */
+    .slide {
       transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+    }
+    .slide-hidden {
+      display: none !important;
+      opacity: 0;
+      transform: scale(0.97);
+    }
+    .slide-active {
+      display: flex !important;
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Shayari card animation */
+    .shayari-box {
+      transition: opacity 0.35s ease-in-out, transform 0.35s ease-in-out;
     }
     .shayari-hidden {
       opacity: 0;
-      transform: translateY(15px) scale(0.97);
+      transform: translateY(12px) scale(0.98);
     }
     .shayari-active {
       opacity: 1;
       transform: translateY(0) scale(1);
     }
 
-    /* Running News Ticker */
+    /* Ticker */
     @keyframes marqueeRun {
       0% { transform: translateX(0%); }
       100% { transform: translateX(-50%); }
@@ -60,161 +85,248 @@
     .marquee-track {
       display: flex;
       width: max-content;
-      animation: marqueeRun 30s linear infinite;
+      animation: marqueeRun 28s linear infinite;
     }
 
-    /* Floating Formula Watermark Animation */
-    @keyframes floatElement {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
+    /* Birthday Glow */
+    @keyframes bdayGlow {
+      0%, 100% { filter: drop-shadow(0 0 15px rgba(245, 158, 11, 0.5)); transform: scale(1); }
+      50% { filter: drop-shadow(0 0 35px rgba(239, 68, 68, 0.8)); transform: scale(1.02); }
     }
-    .floating-badge {
-      animation: floatElement 4.5s ease-in-out infinite;
+    .glow-bday {
+      animation: bdayGlow 2.5s infinite ease-in-out;
     }
   </style>
 </head>
 
-<body class="h-screen w-screen p-3 sm:p-5 flex flex-col justify-center items-center">
+<body class="p-2 sm:p-4 flex items-center justify-center">
 
-  <div class="institute-frame relative w-full h-full rounded-2xl flex flex-col justify-between p-6 sm:p-10 overflow-hidden shadow-2xl">
+  <div class="smartboard-frame relative rounded-2xl p-4 sm:p-6 lg:p-8 overflow-hidden">
 
-    <!-- Top Coaching Brand Header With NEET Countdown -->
-    <header class="flex items-center justify-between z-20 border-b border-blue-900/60 pb-4">
+    <!-- Top Coaching Brand Header -->
+    <header class="flex items-center justify-between z-30 border-b border-blue-900/60 pb-3 flex-shrink-0">
       <div class="flex items-center gap-3">
-        <!-- Mentors Logo Emblem -->
-        <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-amber-500 to-yellow-300 flex items-center justify-center font-brand font-black text-slate-950 text-2xl shadow-lg shadow-amber-500/20">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-tr from-amber-500 to-yellow-300 flex items-center justify-center font-brand font-black text-slate-950 text-xl sm:text-2xl shadow-lg shadow-amber-500/20">
           M
         </div>
         <div>
-          <div class="text-xl sm:text-2xl font-black font-brand tracking-tight text-white flex items-center gap-2">
+          <div class="text-base sm:text-xl font-black font-brand tracking-tight text-white flex items-center gap-1.5">
             MENTORS <span class="text-amber-400">EDUSERV</span>
           </div>
-          <p class="text-[11px] sm:text-xs font-semibold text-blue-300/80 tracking-wider uppercase">
-            Building Foundation & Results • Medical Division
+          <p class="text-[9px] sm:text-[11px] font-bold text-blue-300/80 tracking-wider uppercase">
+            Medical Division • NEET Classroom Stage
           </p>
         </div>
       </div>
 
-      <!-- Right Side: NEET Live Countdown & Digital Clock -->
-      <div class="flex items-center gap-3 sm:gap-4">
-        <!-- Live NEET Countdown Box -->
-        <div class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-red-950/70 border border-red-500/40 text-red-200 shadow-md">
-          <span class="text-base sm:text-lg">⏳</span>
+      <!-- Center Slide Switch Pills -->
+      <div class="flex items-center gap-1.5 bg-slate-900/90 p-1.5 rounded-xl border border-blue-800/70 shadow-inner">
+        <button id="navBtn1" onclick="switchSlide(1)" class="px-3 py-1 sm:px-4 sm:py-1.5 rounded-lg text-xs sm:text-sm font-black transition-all bg-amber-400 text-slate-950 shadow">
+          🎓 Teachers' Day
+        </button>
+        <button id="navBtn2" onclick="switchSlide(2)" class="px-3 py-1 sm:px-4 sm:py-1.5 rounded-lg text-xs sm:text-sm font-black transition-all text-blue-300 hover:text-white flex items-center gap-1">
+          <span>🎂 PUC Sir B'Day</span>
+        </button>
+      </div>
+
+      <!-- Countdown & Clock -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-red-950/80 border border-red-500/50 text-red-200 shadow">
+          <span class="text-xs sm:text-sm">⏳</span>
           <div class="text-left">
-            <div class="text-[9px] sm:text-[10px] uppercase font-bold text-red-400 tracking-wider">NEET Countdown</div>
-            <div id="neetCountdown" class="text-xs sm:text-sm font-mono font-black text-white">Calculating...</div>
+            <div class="text-[8px] sm:text-[9px] uppercase font-black text-red-400 leading-tight">NEET Countdown</div>
+            <div id="neetCountdown" class="text-[11px] sm:text-xs font-mono font-black text-white leading-tight">Loading...</div>
           </div>
         </div>
 
-        <!-- Clock -->
-        <div class="hidden sm:block text-right">
-          <div id="liveClock" class="text-lg sm:text-xl font-mono font-extrabold text-amber-400 drop-shadow">
+        <div class="hidden md:block text-right">
+          <div id="liveClock" class="text-sm sm:text-lg font-mono font-black text-amber-400">
             00:00:00 AM
           </div>
         </div>
       </div>
     </header>
 
-    <!-- Center Stage: Presentation Screen -->
-    <main class="my-auto text-center z-20 max-w-5xl mx-auto w-full space-y-6">
+    <!-- SLIDE 1: TEACHERS' DAY SPECIAL -->
+    <main id="slide1" class="slide slide-active flex-col justify-center items-center text-center z-20 w-full max-w-5xl mx-auto flex-1 py-2 sm:py-4 gap-3 sm:gap-5">
       
-      <!-- Stage Banner -->
-      <div class="space-y-1">
-        <div class="inline-block px-4 py-1 rounded-full bg-blue-950/80 border border-blue-500/30 text-blue-200 text-xs sm:text-sm font-bold uppercase tracking-widest mb-1">
+      <div class="space-y-1 flex-shrink-0">
+        <div class="inline-block px-3 py-0.5 rounded-full bg-blue-950/80 border border-blue-500/30 text-blue-200 text-[11px] sm:text-xs font-bold uppercase tracking-widest">
           5th September • Classroom Stage Celebration
         </div>
-        <h1 class="text-5xl sm:text-7xl font-brand font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-400 tracking-tight drop-shadow-2xl">
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-brand font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-400 tracking-tight drop-shadow-2xl">
           HAPPY TEACHERS' DAY!
         </h1>
-        <p class="text-base sm:text-xl font-semibold text-blue-200/90 font-chalk">
+        <p class="text-sm sm:text-lg font-semibold text-blue-200/90 font-chalk">
           To The Pillars Of Mentors Eduserv: Humare Gurus, Mentors & Besties! 🩺🔥
         </p>
       </div>
 
-      <!-- Live Dynamic Shayari Display Box -->
-      <div class="min-h-[220px] flex items-center justify-center px-2">
-        <div id="shayariCard" class="shayari-box shayari-active max-w-4xl w-full p-6 sm:p-8 rounded-2xl bg-slate-900/85 border border-amber-400/40 shadow-2xl backdrop-blur-md relative overflow-hidden">
+      <!-- Shayari Card Container -->
+      <div class="w-full max-w-4xl flex items-center justify-center flex-1 max-h-[220px] sm:max-h-[240px]">
+        <div id="shayariCard" class="shayari-box shayari-active w-full h-full p-4 sm:p-6 rounded-2xl bg-slate-900/85 border border-amber-400/40 shadow-2xl backdrop-blur-md relative flex flex-col justify-center items-center">
           <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent"></div>
           
-          <p id="shayariText" class="font-brand text-xl sm:text-3xl text-white font-bold leading-relaxed drop-shadow">
+          <p id="shayariText" class="font-brand text-lg sm:text-2xl lg:text-3xl text-white font-bold leading-relaxed drop-shadow">
             "Bio me 360 laane ka sapna sajate hain,<br>Aur Physics me 'Option B' Bhagwan bharose laga aate hain!"
           </p>
 
-          <div class="mt-4 flex items-center justify-center gap-3">
-            <span class="h-[2px] w-8 bg-amber-400"></span>
-            <span id="shayariTag" class="text-xs sm:text-sm uppercase tracking-widest text-amber-300 font-extrabold">
+          <div class="mt-3 flex items-center justify-center gap-2 sm:gap-3">
+            <span class="h-[2px] w-6 sm:w-8 bg-amber-400"></span>
+            <span id="shayariTag" class="text-[11px] sm:text-xs uppercase tracking-widest text-amber-300 font-extrabold">
               — Balanced Preparation Myth 🧬🎲
+            </span>
+            <span class="h-[2px] w-6 sm:w-8 bg-amber-400"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage Buttons: Dedicated Birthday Special Open Button Right Here -->
+      <div class="flex flex-wrap justify-center items-center gap-3 pt-1 flex-shrink-0">
+        <button onclick="switchSlide(2)" class="glow-bday px-6 py-2.5 sm:px-8 sm:py-3.5 bg-gradient-to-r from-red-500 via-amber-400 to-yellow-400 hover:brightness-110 active:scale-95 text-slate-950 font-black rounded-xl shadow-xl transition text-sm sm:text-base flex items-center gap-2 border-2 border-yellow-200">
+          <span>🎂 Open PUC Sir Birthday Special 🎉</span>
+        </button>
+        <button onclick="triggerGrandFireworks()" class="px-5 py-2.5 sm:px-7 sm:py-3.5 bg-blue-900/80 hover:bg-blue-800 border border-blue-400/40 active:scale-95 text-blue-100 font-extrabold rounded-xl shadow transition text-sm sm:text-base flex items-center gap-2">
+          <span>🎊 Mentors Topper Fireworks</span>
+        </button>
+      </div>
+
+    </main>
+
+    <!-- SLIDE 2: PUC (UJJWAL CHAUHAN SIR) BIRTHDAY SPECIAL -->
+    <main id="slide2" class="slide slide-hidden flex-col justify-center items-center text-center z-20 w-full max-w-5xl mx-auto flex-1 py-2 sm:py-4 gap-3 sm:gap-5">
+      
+      <div class="space-y-1 flex-shrink-0">
+        <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-gradient-to-r from-amber-500/20 to-red-500/20 border border-amber-400/50 text-amber-300 text-[11px] sm:text-xs font-black uppercase tracking-widest">
+          <span>🎂 Special Birthday Stage</span>
+          <span>•</span>
+          <span>Mentors Eduserv Star Faculty</span>
+        </div>
+        
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-brand font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-amber-300 to-red-400 tracking-tight drop-shadow-2xl">
+          HAPPY BIRTHDAY PUC SIR! 👑
+        </h1>
+        
+        <div class="text-xl sm:text-2xl lg:text-3xl font-black text-white font-brand tracking-wide">
+          Er. Ujjwal Chauhan Sir <span class="text-amber-400 font-chalk text-2xl sm:text-3xl">(PUC Sir)</span>
+        </div>
+      </div>
+
+      <!-- Birthday Card Container -->
+      <div class="w-full max-w-4xl flex items-center justify-center flex-1 max-h-[240px] sm:max-h-[260px]">
+        <div class="w-full h-full p-4 sm:p-6 rounded-2xl bg-gradient-to-b from-slate-900/95 to-slate-950/95 border-2 border-amber-400 shadow-2xl backdrop-blur-md relative flex flex-col justify-center items-center space-y-2.5">
+          <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-amber-400 via-red-500 to-yellow-300"></div>
+          
+          <p class="font-brand text-lg sm:text-2xl text-amber-100 font-extrabold leading-snug">
+            "Sir ka janamdin aur Teachers' Day ek saath aaya hai...<br>
+            Matlab cake bhi sir hi khilayenge aur party bhi double denge!" 🎂😋
+          </p>
+
+          <p class="font-chalk text-xl sm:text-2xl text-blue-200 leading-snug">
+            "Class me numericals se kitna bhi darr lage, par PUC Sir ke rehte concept kabhi fail nahi hota!<br>
+            Happy Birthday to our favorite mentor, brother & rockstar! 🔥"
+          </p>
+
+          <div class="flex items-center justify-center gap-2 pt-1">
+            <span class="h-[2px] w-8 bg-amber-400"></span>
+            <span class="text-[10px] sm:text-xs uppercase tracking-widest text-amber-300 font-black">
+              — From The Entire NEET Batch & Backbenchers 🩺❤️
             </span>
             <span class="h-[2px] w-8 bg-amber-400"></span>
           </div>
         </div>
       </div>
 
-      <!-- Stage Button -->
-      <div class="flex justify-center items-center gap-4 pt-1">
-        <button onclick="triggerGrandFireworks()" class="px-8 py-3.5 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:brightness-110 active:scale-95 text-slate-950 font-black rounded-xl shadow-lg shadow-amber-400/20 transition text-base sm:text-lg flex items-center gap-2">
-          <span>🎊 Mentors Topper Taaliyan & Fireworks 🎊</span>
+      <!-- Birthday Buttons -->
+      <div class="flex flex-wrap justify-center items-center gap-3 pt-1 flex-shrink-0">
+        <button onclick="triggerBirthdayBlast()" class="px-6 py-2.5 sm:px-8 sm:py-3.5 bg-gradient-to-r from-amber-400 via-red-500 to-yellow-400 hover:brightness-110 active:scale-95 text-slate-950 font-black rounded-xl shadow-xl transition text-sm sm:text-base flex items-center gap-2">
+          <span>🎂 Cake Cutting Taaliyan & Fireworks 🎆</span>
+        </button>
+        <button onclick="switchSlide(1)" class="px-5 py-2.5 sm:px-7 sm:py-3.5 bg-blue-950 hover:bg-blue-900 border border-blue-400/40 text-blue-200 hover:text-white font-extrabold rounded-xl transition text-sm sm:text-base flex items-center gap-1.5">
+          <span>👈 Back to Front Page</span>
         </button>
       </div>
 
     </main>
 
-    <!-- Bottom Ticker & Status -->
-    <div class="z-20 border-t border-blue-900/60 pt-3 space-y-2">
-      <!-- Corporate News Ticker -->
-      <div class="overflow-hidden w-full bg-slate-950/60 py-2 rounded-lg border border-blue-800/40">
-        <div class="marquee-track font-semibold text-sm sm:text-base text-amber-200/90 gap-10">
+    <!-- Bottom Ticker -->
+    <div class="z-30 border-t border-blue-900/60 pt-2 space-y-1.5 flex-shrink-0">
+      <div class="overflow-hidden w-full bg-slate-950/60 py-1.5 rounded-lg border border-blue-800/40">
+        <div class="marquee-track font-bold text-xs sm:text-sm text-amber-200/90 gap-8">
+          <span>🎂 VIP ALERT: "A very Happy Birthday to Ujjwal Chauhan Sir (PUC Sir)! Party toh banti hai sir!"</span>
+          <span>•</span>
           <span>📢 Mentors Faculty Special: "NCERT is the ultimate syllabus key, solve everyday!"</span>
           <span>•</span>
           <span>📢 "Aman se pucho: Sir, sabse pyare aur favorite teacher ka naam kya hai?!"</span>
           <span>•</span>
-          <span>📢 "Sir: 'Krebs Cycle yaad hui ya lunch box kholu?'"</span>
-          <span>•</span>
           <span>📢 "Sir bolte hain: 'Tum sab meri naak kataoge!' — Sir, pehle syllabus toh time pe poora karao!"</span>
           <span>•</span>
-          <span>📢 "Mentors Eduserv: Creating Doctors with Concept & Discipline!"</span>
+          <span>🎂 VIP ALERT: "A very Happy Birthday to Ujjwal Chauhan Sir (PUC Sir)! Party toh banti hai sir!"</span>
           <span>•</span>
-          <span>📢 "Aman se pucho: Sir, sabse pyare aur favorite teacher ka naam kya hai?!"</span>
+          <span>📢 "Mentors Eduserv: Creating Doctors with Concept & Discipline!"</span>
         </div>
       </div>
 
-      <!-- Bottom Info Row -->
-      <div class="flex items-center justify-between text-xs text-blue-300/70 px-1">
-        <div class="flex items-center gap-3">
+      <!-- Bottom Status -->
+      <div class="flex items-center justify-between text-[11px] sm:text-xs text-blue-300/70 px-1">
+        <div class="flex items-center gap-2">
           <span class="text-amber-300 font-bold">Auto Fireworks Active 🎆</span>
           <span>•</span>
-          <span>Press <kbd class="px-2 py-0.5 rounded bg-blue-900/50 text-amber-300 font-mono text-xs">F</kbd> for Fullscreen</span>
-          <span>•</span>
-          <span>Tap screen for blast</span>
+          <span>Press <kbd class="px-1.5 py-0.5 rounded bg-blue-900/60 text-amber-300 font-mono text-[10px]">F</kbd> for Fullscreen</span>
         </div>
-        <div class="font-bold text-sm text-amber-300">
-          Mentors Classroom Division • Sincere Respect To All Faculties 💐
+        <div class="font-bold text-amber-300">
+          Mentors Classroom Stage • Dedicated to PUC (Ujjwal Chauhan Sir) & All Faculties 💐
         </div>
       </div>
     </div>
 
-    <!-- Coaching Watermark Elements -->
-    <div class="absolute inset-0 pointer-events-none z-10 flex flex-col justify-between p-8 font-brand select-none opacity-10 text-white text-3xl font-black">
+    <!-- Background Watermark -->
+    <div class="absolute inset-0 pointer-events-none z-10 flex flex-col justify-between p-6 font-brand select-none opacity-10 text-white text-2xl font-black">
       <div class="flex justify-between">
-        <span class="floating-badge">MENTORS EDUSERV</span>
+        <span>MENTORS EDUSERV</span>
         <span>Target: AIIMS Delhi 🩺</span>
-        <span class="floating-badge">NEET 720/720</span>
+        <span>PUC SIR SPECIAL 👑</span>
       </div>
-      <div class="flex justify-between items-center">
-        <span>F = q(E + v × B)</span>
-        <span class="text-5xl text-amber-400 font-black">RESULT PRODUCERS</span>
-        <span>DNA ➔ mRNA ➔ Protein</span>
-      </div>
-      <div class="flex justify-between mb-12">
-        <span class="floating-badge">Discipline • Excellence</span>
-        <span>Rank 1 Mindset</span>
-        <span class="floating-badge">Kavach Test Series</span>
+      <div class="flex justify-between mb-8">
+        <span>Discipline • Excellence</span>
+        <span>Happy Birthday PUC Sir!</span>
+        <span>Kavach Test Series</span>
       </div>
     </div>
 
   </div>
 
   <script>
+    // Slide switch handler
+    let currentSlide = 1;
+    function switchSlide(slideNumber) {
+      currentSlide = slideNumber;
+      const s1 = document.getElementById('slide1');
+      const s2 = document.getElementById('slide2');
+      const b1 = document.getElementById('navBtn1');
+      const b2 = document.getElementById('navBtn2');
+
+      if (slideNumber === 1) {
+        s2.classList.remove('slide-active');
+        s2.classList.add('slide-hidden');
+        s1.classList.remove('slide-hidden');
+        s1.classList.add('slide-active');
+
+        b1.className = "px-3 py-1 sm:px-4 sm:py-1.5 rounded-lg text-xs sm:text-sm font-black transition-all bg-amber-400 text-slate-950 shadow";
+        b2.className = "px-3 py-1 sm:px-4 sm:py-1.5 rounded-lg text-xs sm:text-sm font-black transition-all text-blue-300 hover:text-white";
+        triggerGrandFireworks();
+      } else {
+        s1.classList.remove('slide-active');
+        s1.classList.add('slide-hidden');
+        s2.classList.remove('slide-hidden');
+        s2.classList.add('slide-active');
+
+        b2.className = "px-3 py-1 sm:px-4 sm:py-1.5 rounded-lg text-xs sm:text-sm font-black transition-all bg-gradient-to-r from-amber-400 to-red-500 text-slate-950 shadow";
+        b1.className = "px-3 py-1 sm:px-4 sm:py-1.5 rounded-lg text-xs sm:text-sm font-black transition-all text-blue-300 hover:text-white";
+        triggerBirthdayBlast();
+      }
+    }
+
     // Live Digital Clock
     function updateClock() {
       const now = new Date();
@@ -228,7 +340,7 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // NEET Countdown Timer
+    // NEET Countdown
     function updateNEETCountdown() {
       const currentYear = new Date().getFullYear();
       let targetDate = new Date(`May 2, ${currentYear + 1} 14:00:00`).getTime();
@@ -250,7 +362,7 @@
     setInterval(updateNEETCountdown, 1000);
     updateNEETCountdown();
 
-    // 6 Selected Shayaris (5 NEET/Roast + Aman's Favorite Teacher Mystery)
+    // Shayaris array
     const shayaris = [
       {
         text: "Bio me 360 laane ka sapna sajate hain,<br>Aur Physics me 'Option B' Bhagwan bharose laga aate hain!",
@@ -284,6 +396,7 @@
     const shayariTag = document.getElementById('shayariTag');
 
     function rotateShayari() {
+      if (currentSlide !== 1) return;
       shayariCard.classList.remove('shayari-active');
       shayariCard.classList.add('shayari-hidden');
 
@@ -294,69 +407,41 @@
 
         shayariCard.classList.remove('shayari-hidden');
         shayariCard.classList.add('shayari-active');
-      }, 400);
+      }, 350);
     }
-
-    // Auto rotate shayari every 7.5 seconds
     setInterval(rotateShayari, 7500);
 
-    // Grand Celebration Fireworks
+    // Fireworks
     function triggerGrandFireworks() {
       const end = Date.now() + 2000;
       (function frame() {
         confetti({
-          particleCount: 7,
-          angle: 60,
-          spread: 65,
-          origin: { x: 0, y: 0.8 },
+          particleCount: 7, angle: 60, spread: 65, origin: { x: 0, y: 0.8 },
           colors: ['#f59e0b', '#3b82f6', '#10b981', '#ffffff']
         });
         confetti({
-          particleCount: 7,
-          angle: 120,
-          spread: 65,
-          origin: { x: 1, y: 0.8 },
+          particleCount: 7, angle: 120, spread: 65, origin: { x: 1, y: 0.8 },
           colors: ['#f59e0b', '#3b82f6', '#10b981', '#ffffff']
         });
         if (Date.now() < end) requestAnimationFrame(frame);
       })();
     }
 
-    // Auto Fireworks har 12 sec me
+    function triggerBirthdayBlast() {
+      const end = Date.now() + 2500;
+      (function frame() {
+        confetti({
+          particleCount: 8, angle: 60, spread: 75, origin: { x: 0, y: 0.7 },
+          colors: ['#f59e0b', '#ef4444', '#ec4899', '#8b5cf6', '#3b82f6']
+        });
+        confetti({
+          particleCount: 8, angle: 120, spread: 75, origin: { x: 1, y: 0.7 },
+          colors: ['#f59e0b', '#ef4444', '#ec4899', '#8b5cf6', '#3b82f6']
+        });
+        if (Date.now() < end) requestAnimationFrame(frame);
+      })();
+    }
+
     setInterval(() => {
       confetti({
-        particleCount: 35,
-        spread: 90,
-        origin: { x: Math.random() * 0.6 + 0.2, y: 0.35 },
-        colors: ['#f59e0b', '#60a5fa', '#34d399', '#ffffff']
-      });
-    }, 12000);
-
-    // Fullscreen and keyboard handlers
-    window.addEventListener('keydown', (e) => {
-      if (e.code === 'Space') {
-        e.preventDefault();
-        triggerGrandFireworks();
-      } else if (e.key === 'f' || e.key === 'F') {
-        e.preventDefault();
-        if (!document.fullscreenElement) {
-          document.documentElement.requestFullscreen().catch(() => {});
-        } else {
-          if (document.exitFullscreen) document.exitFullscreen();
-        }
-      }
-    });
-
-    document.addEventListener('click', (e) => {
-      if (e.target.tagName !== 'BUTTON') {
-        triggerGrandFireworks();
-      }
-    });
-
-    window.addEventListener('DOMContentLoaded', () => {
-      setTimeout(triggerGrandFireworks, 500);
-    });
-  </script>
-</body>
-    </html>
-    
+        particleCount: 30, spread: 90, origin
